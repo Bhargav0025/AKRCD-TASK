@@ -33,7 +33,7 @@ This guide outlines the steps to deploy a React application (CollectTracker) on 
 3.  **Clone Repository:**
     * Clone the CollectTracker repository:
         ```bash
-        git clone [https://github.com/Bighairymtnman/CollectTracker.git](https://github.com/Bighairymtnman/CollectTracker.git)
+        git clone https://github.com/Bighairymtnman/CollectTracker.git
         ```
 4.  **Navigate to Repository:**
     * Change directory to the cloned repository:

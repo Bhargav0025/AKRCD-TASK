@@ -33,7 +33,7 @@ This guide outlines the steps to deploy a Java web application (onlinebookstore)
 3.  **Clone Repository:**
     * Clone the onlinebookstore repository:
         ```bash
-        git clone [https://github.com/shashirajraja/onlinebookstore.git](https://github.com/shashirajraja/onlinebookstore.git)
+        git clone https://github.com/shashirajraja/onlinebookstore.git
         ```
 4.  **Navigate to Repository:**
     * Change directory to the cloned repository:
@@ -68,7 +68,7 @@ This guide outlines the steps to deploy a Java web application (onlinebookstore)
     ```
 2.  **Download Tomcat:**
     ```bash
-    wget [https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.102/bin/apache-tomcat-9.0.102.tar.gz](https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.102/bin/apache-tomcat-9.0.102.tar.gz)
+    wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.102/bin/apache-tomcat-9.0.102.tar.gz 
     ```
 3.  **Extract Tomcat:**
     ```bash

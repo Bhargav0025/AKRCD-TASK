@@ -33,7 +33,7 @@ This guide details the steps to deploy a Python-based application (SolarX) using
 3.  **Clone Repository:**
     * Clone the SolarX repository:
         ```bash
-        git clone [https://github.com/MainakRepositor/SolarX.git](https://github.com/MainakRepositor/SolarX.git)
+        git clone https://github.com/MainakRepositor/SolarX.git
         ```
 4.  **Navigate to Repository:**
     * Change directory to the cloned repository:
