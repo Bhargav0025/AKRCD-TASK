@@ -6,7 +6,7 @@ This guide outlines the steps to deploy a React application (CollectTracker) on 
 
 1.  **Launch Instance:**
     * Navigate to the EC2 dashboard in the AWS Management Console.
-    * Click "Launch instance."
+    * Click "Launch instance.
     * Provide a name for your instance.
     * Select an appropriate Amazon Machine Image (AMI) (e.g., Ubuntu).
     * Choose or create a key pair for SSH access.
