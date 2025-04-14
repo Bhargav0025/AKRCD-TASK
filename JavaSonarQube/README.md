@@ -126,7 +126,7 @@
 
 16. **Clone Git Repository:**
     ```bash
-    git clone [https://github.com/shashirajraja/onlinebookstore.git]
+    git clone https://github.com/shashirajraja/onlinebookstore.git
 
 17. **Navigate to Repository Directory:**
     ```bash
