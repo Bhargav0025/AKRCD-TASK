@@ -142,6 +142,6 @@
     ```bash
     mvn sonar:sonar -Dsonar.host.url= http://18.209.21.81:9000 http://18.209.21.81:9000 -Dsonar.login=sqa_f982f549d71dccbe8f4417d5b166e372d92c3d79 -Dsonar.java.binaries=target/classes
     ```
-    ![](./buildcommand.png)
-    ![](./buils-sucess.png)
-    ![](./sonarfinal.png)
+    ![](./Images/buildcommand.png)
+    ![](./Images/buils-sucess.png)
+    ![](./Images/sonarfinal.png)
