@@ -152,5 +152,5 @@
     -   **Important:** Store the token securely. Never expose it in public repositories or scripts.
 12. **SonarQube Web Interface:** Access SonarQube at http://`<your-ec2-public-ip>`:9000 to view the analysis results.
 
-[](./soanrbuild.png)
-[](./output.png)
+[](./Image/soanrbuild.png)
+[](./Image/output.png)
