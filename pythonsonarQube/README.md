@@ -153,4 +153,4 @@
 12. **SonarQube Web Interface:** Access SonarQube at http://`<your-ec2-public-ip>`:9000 to view the analysis results.
 
 ![](./Image/soanrbuild.png)
-![](./Image/output.png)
+![](./Image/image.png)
