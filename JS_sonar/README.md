@@ -141,7 +141,8 @@ This guide outlines the steps to deploy the `CollectTracker` application on an A
 * Ensure that port 9000 is open in your security group.
 * SonarQube may take some time to start. Check the logs in `sonarqube-9.9.0.65466/logs/sonar.log` for any errors.
 * Adjust memory settings in `sonarqube-9.9.0.65466/conf/sonar.properties` if you encounter performance issues.
-* The `sonar-project.properties` file is the preferred method for configuring SonarScanner for non-Maven projects.
+* The `sonar-project.properties` file is the preferred method for configuring SonarScanner for non-Maven projects
 
 ![](./Images/arun2.png)
 ![](./Images/arun.png)
+
