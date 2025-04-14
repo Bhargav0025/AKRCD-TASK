@@ -70,7 +70,7 @@ This guide outlines the steps to deploy the `CollectTracker` application on an A
     sonar.host.url=http://<your-ec2-public-ip>:9000
     sonar.login=<your-sonar-token>
     ```
-    ![](./arun3%201.png)
+    ![](./Images/arun3%201.png)
 
     * Replace `<your-ec2-public-ip>` with your EC2 instance's public IP.
     * Replace `<your-sonar-token>` with your SonarQube authentication token.
@@ -143,5 +143,5 @@ This guide outlines the steps to deploy the `CollectTracker` application on an A
 * Adjust memory settings in `sonarqube-9.9.0.65466/conf/sonar.properties` if you encounter performance issues.
 * The `sonar-project.properties` file is the preferred method for configuring SonarScanner for non-Maven projects.
 
-![](./arun2.png)
-![](./arun.png)
+![](./Images/arun2.png)
+![](./Images/arun.png)
