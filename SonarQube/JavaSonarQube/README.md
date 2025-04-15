@@ -1,147 +1,96 @@
-## SonarQube Setup and Maven Analysis
+## Setting up SonarQube on EC2 and Analyzing a Maven Project
 
-## STEP 1: Launch EC2 Instance
+This document outlines the steps to set up SonarQube on an EC2 instance, configure it, and analyze a Maven project.
 
-1.  **Launch Instance:**
-    * Navigate to the EC2 dashboard in the AWS Management Console.
-    * Click "Launch instance.
-    * Provide a name for your instance.
-    * Select an appropriate Amazon Machine Image (AMI) (e.g., Ubuntu).
-    * Choose or create a key pair for SSH access.
-    * Configure security group settings to allow inbound traffic on port 9000.
+**STEP 1: Create an EC2 Server**
 
-## STEP 2: Connect to EC2 via SSH
+* **Server Size:** t2.medium
+* **Security Group:**
+    * SSH (port 22)
+    * Custom TCP (port 9000)
 
-1.  **SSH Connection:**
-    * Open a terminal and use the following command to connect to your EC2 instance:
-        ```bash
-        ssh -i your-key.pem ubuntu@<your-ec2-public-ip>
-        ```
-    * Replace `your-key.pem` with the path to your key pair file and `<your-ec2-public-ip>` with the public IP address of your EC2 instance.
-2.  **Install Git (if needed):**
-    * Check if Git is installed:
-        ```bash
-        git --version
-        ```
-    * If Git is not installed, install it:
-        ```bash
-        sudo apt update
-        sudo apt install git -y
-        ```
-3.  **Clone Repository:**
-    * Clone the onlinebookstore repository:
-        ```bash
-        git clone https://github.com/shashirajraja/onlinebookstore.git
-        ```
-4.  **Navigate to Repository:**
-    * Change directory to the cloned repository:
-        ```bash
-        cd onlinebookstore
-        ```
+**STEP 2: Connect via SSH and Install SonarQube**
 
-## STEP 3: Install Maven
-
-1.  **Install Maven:**
+* Connect to the EC2 instance using SSH:
     ```bash
-    sudo apt install maven -y
+    ssh -i your-key.pem ubuntu@<your-ec2-public-ip>
     ```
-2.  **Check Maven Version:**
+* Install Java 17:
     ```bash
-    mvn -version
+    sudo apt install openjdk-17-jre-headless
     ```
-1.  **Install OpenJDK 17:**
+* Verify Java installation:
     ```bash
-    sudo apt install openjdk-17-jdk
+    java --version
     ```
-
-2.  **Download SonarQube:**
+* Download SonarQube (version 25.4.0.105899):
     ```bash
-    wget [https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.4.0.105899.zip]
+    wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.4.0.105899.zip
     ```
-
-3.  **List Files:**
-    ```bash
-    ls
-    ```
-
-4.  **Install Unzip:**
-    ```bash
-    sudo apt install unzip
-    ```
-
-5.  **Unzip SonarQube:**
+* Extract the downloaded ZIP file:
     ```bash
     unzip sonarqube-25.4.0.105899.zip
     ```
 
-6.  **List Files:**
-    ```bash
-    ls
-    ```
+**STEP 3: Configure and Start SonarQube**
 
-7.  **Navigate to SonarQube Directory:**
+* Navigate to the SonarQube directory:
     ```bash
-    cd sonarqube-25.4.0.105899/
+    cd sonarqube-25.4.0.105899
     ```
-
-8.  **Navigate to Bin Directory:**
+* Navigate to the bin directory:
     ```bash
     cd bin
     ```
-
-9.  **Navigate to Linux x86-64 Directory:**
-    ```bash
-    cd linux-x86-64/
-    ```
-
-10. **Start SonarQube:**
+* Navigate to the Linux x86-64 directory:
+* Start SonarQube:
     ```bash
     ./sonar.sh start
     ```
 
-11. **Check SonarQube Status:**
-    ```bash
-    sudo systemctl status sonarqube
-    ```
+**STEP 4: Access SonarQube Web Interface**
 
-12. **Update Package Lists:**
-    ```bash
-    sudo apt update
+* Open a web browser and navigate to:
     ```
-
-13. **Check Java Version:**
-    ```bash
-    java --version
+    http://<your-ec2-public-ip>:9000
     ```
+* You should see the SonarQube web interface.
+* Generate Token to integrate with maven
+  ![](./Images/iiii.png)
 
-14. **Install Maven:**
+**STEP 5: Install Maven, Clone the Project, and Analyze with SonarQube**
+
+* Clone the Maven project:
+    ```bash
+    git clone https://github.com/shashirajraja/onlinebookstore.git
+    ```
+* Navigate to the project directory:
+    ```bash
+    cd onlinebookstore
+    ```
+* Install Maven:
     ```bash
     sudo apt install maven -y
     ```
-
-15. **Check Java Version:**
-    ```bash
-    java --version
-    ```
-
-16. **Clone Git Repository:**
-    ```bash
-    git clone https://github.com/shashirajraja/onlinebookstore.git
-
-17. **Navigate to Repository Directory:**
-    ```bash
-    cd onlinebookstore/
-    ```
-
-18. **Build Project with Maven:**
+* Build the project:
     ```bash
     mvn package
     ```
-
-19. **Run SonarQube Analysis:**
+* Analyze the project with SonarQube:
     ```bash
-    mvn sonar:sonar -Dsonar.host.url= http://18.209.21.81:9000 http://18.209.21.81:9000 -Dsonar.login=sqa_f982f549d71dccbe8f4417d5b166e372d92c3d79 -Dsonar.java.binaries=target/classes
+    mvn sonar:sonar \
+      -Dsonar.host.url=http://<your-ec2-public-ip>:9000 \
+      -Dsonar.login=sqa_739fd4c15f7be37705c886379efe0af5e2bee659 \
+      -Dsonar.java.binaries=target/classes
     ```
-    ![](./Images/buildcommand.png)
-    ![](./Images/buils-sucess.png)
-    ![](./Images/sonarfinal.png)
+    ![](./Images/yyy.png)
+    ![](./Images/y1.png)
+
+    **Important:** Replace `<your-ec2-public-ip>` with the actual public IP address of your EC2 instance.
+
+**STEP 6: Check Code Quality in SonarQube GUI**
+
+* Return to the SonarQube web interface (http://<your-ec2-public-ip>:9000).
+* You should now see the analyzed project and its code quality metrics.
+  ![](./Images/ii.png)
+  ![](./Images/iii.png)
