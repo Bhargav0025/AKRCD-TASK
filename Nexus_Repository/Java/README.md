@@ -15,7 +15,7 @@
 ## STEP 2: Install Java
 
 ```bash
-sudo apt update
+sudo apt updatEs
 sudo apt install openjdk-11-jdk -y
 java -version
 ```
@@ -150,7 +150,7 @@ mvn clean deploy
 ```
 ![](./Images/Buils-sucess.png)
 
-> This will build the artifact and deploy it to the **Nexus Maven Releases** repository.
+> This wil build the artifact and deploy it to the **Nexus Maven Releases** repository.
 
 ![](./Images/nexus1.png)
 ![](./Images/nexusfinal.png)
