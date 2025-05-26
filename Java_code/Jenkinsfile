@@ -19,12 +19,12 @@ pipeline {
             steps {
                 dir('Java_code') {
                     withSonarQubeEnv("${SONARQUBE_ENV}") {
-                        sh '''
+                        sh """
                             mvn clean verify sonar:sonar \
                             -Dsonar.projectKey=java-app \
                             -Dsonar.host.url=http://20.55.36.230:9000 \
                             -Dsonar.login=$SONAR_AUTH_TOKEN
-                        '''
+                        """
                     }
                 }
             }
