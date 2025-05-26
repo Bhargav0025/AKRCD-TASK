@@ -1,11 +1,80 @@
-pipeline {  
-    agent any  
-        stages {  
-       	    stage("git_checkout") {  
-           	    steps {  
-              	    echo "cloning repository" 
-              	    echo "repo cloned successfully"  
-              	    }  
-         	    } 
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'bhargav0025/java-app'
+        DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
+        SONARQUBE_ENV = 'SonarQube'
+        SONAR_AUTH_TOKEN = credentials('sonar-token')
+    }
+
+    stages {
+        stage('Clone Code') {
+            steps {
+                git credentialsId: 'github-creds', url: 'https://github.com/Bhargav0025/AKRCD-TASK.git', branch: 'main'
+            }
         }
+
+        stage('Code Quality - SonarQube') {
+            steps {
+                withSonarQubeEnv("${SONARQUBE_ENV}") {
+                    sh '''
+                        mvn clean verify sonar:sonar \
+                        -Dsonar.projectKey=java-app \
+                        -Dsonar.host.url=http://20.55.36.230:9000 \
+                        -Dsonar.login=$SONAR_AUTH_TOKEN
+                    '''
+                }
+            }
+        }
+
+        stage('Build WAR') {
+            steps {
+                sh 'mvn package -DskipTests'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${BUILD_NUMBER}")
+                }
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+
+        stage('Trivy Scan') {
+            steps {
+                sshagent(['trivy-ssh']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no Docker-Trivy@20.92.200.231 \
+                        trivy image --exit-code 1 --severity HIGH,CRITICAL ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to AKS') {
+            steps {
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                    sh """
+                        export KUBECONFIG=$KUBECONFIG
+                        kubectl apply -f k8s/k8s-deployment.yaml
+                        kubectl apply -f k8s/k8s-service.yaml
+                        kubectl apply -f k8s/k8s-ingress.yaml
+                        kubectl apply -f k8s/k8s-hpa.yaml
+                    """
+                }
+            }
+        }
+    }
 }
