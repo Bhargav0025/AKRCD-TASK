@@ -6,7 +6,7 @@ COPY src ./src
 COPY Webcontent ./Webcontent
 RUN mvn clean package -DskipTests
 
-ADD https://repo1.maven.org/maven2/com/heroku/webapp-runner/9.0.56.0/webapp-runner-9.0.56.0.jar Webapp-runner.jar
+ADD https://repo1.maven.org/maven2/com/heroku/webapp-runner/9.0.34.0/webapp-runner-9.0.34.0.jar Webapp-runner.jar
 
 
 #---------------Stage : 2 ---------#
