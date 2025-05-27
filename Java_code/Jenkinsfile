@@ -65,7 +65,7 @@ pipeline {
                 sshagent(['trivy-ssh']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no Docker-Trivy@20.92.200.231 \
-                        trivy image --exit-code 1 --severity HIGH,CRITICAL ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                        trivy image --exit-code 1 --severity HIGH,CRITICAL ${DOCKER_IMAGE}:85
                     """
                 }
             }
