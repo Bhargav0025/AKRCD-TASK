@@ -22,7 +22,7 @@ pipeline {
                         withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
                             sh """
                                 mvn clean verify sonar:sonar \
-                                -Dsonar.projectKey=java-app \
+                                -Dsonar.sources=src/main/java \
                                 -Dsonar.host.url=http://20.55.36.230:9000 \
                                 -Dsonar.token=${SONAR_AUTH_TOKEN}
                             """
