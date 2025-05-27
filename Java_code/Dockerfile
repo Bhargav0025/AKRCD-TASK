@@ -11,7 +11,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.war app.war
-COPY --from=builder /app/target/webapp-runner.jar webapp-runner.jar
+COPY --from=builder /app/target/Webapp-runner.jar Webapp-runner.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","webapp-runner.jar","app.war"]
+ENTRYPOINT ["java","-jar","Webapp-runner.jar","app.war"]
 
